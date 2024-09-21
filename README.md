@@ -1,4 +1,4 @@
-# GPT_Model_Trainer
+# GPT2_Model_Trainer
 
 ## Overview
 
