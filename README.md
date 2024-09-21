@@ -28,7 +28,7 @@ The `GPT_Model_Trainer` project is designed to train GPT-2 models with support f
 
 1. Clone the repository:
     ```sh
-    git clone https://github.com/kmcowan/GPT_Model_Trainer.git
+    git clone https://github.com/kmcowan/GPT2_Model_Trainer.git
     cd GPT_Model_Trainer
     ```
 
