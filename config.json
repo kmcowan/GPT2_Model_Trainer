@@ -1,10 +1,10 @@
 {
     "data_source_type": "file",
-    "solr_url": "http://localhost:8983/solr/training_data",
+    "solr_url": "[SOLR_URL]",
     "query": "*:*",
-    "file_path": "/Users/kevincowan/training_data/The-Wind-in-the-Willows-by-Kenneth-Grahame.txt",
+    "file_path": "[PATH_TO_FILE]",
     "url": "https://solr.apache.org/guide/solr/latest/index.html",
-    "directory_path": "/Users/kevincowan/training_data",
+    "directory_path": "[PATH_TO_DIRECTORY]",
     "embed_dim": 256,
     "num_heads": 8,
     "num_layers": 6,
