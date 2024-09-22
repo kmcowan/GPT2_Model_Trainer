@@ -1,0 +1,16 @@
+{
+    "data_source_type": "file",
+    "solr_url": "http://localhost:8983/solr/training_data",
+    "query": "*:*",
+    "file_path": "/Users/kevincowan/training_data/The-Wind-in-the-Willows-by-Kenneth-Grahame.txt",
+    "url": "https://solr.apache.org/guide/solr/latest/index.html",
+    "directory_path": "/Users/kevincowan/training_data",
+    "embed_dim": 256,
+    "num_heads": 8,
+    "num_layers": 6,
+    "learning_rate": 0.0003,
+    "num_epochs": 100,
+    "batch_size": 1000,
+    "use_dir": true,
+    "model_name": "rockymtn_gpt2.pth"
+}

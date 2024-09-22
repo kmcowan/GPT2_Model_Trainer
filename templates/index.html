@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Upload & Training</title>
+   <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
+    <script src="/static/assets/js/app.js"></script>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Upload Document for LLM Training</h2>
+        <form id="uploadForm" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="file">Upload Document (PDF or TXT):</label>
+                <input type="file" id="file" name="file" class="form-control-file">
+            </div>
+            <button type="button" class="btn btn-primary" onclick="uploadFile()">Upload</button>
+        </form>
+
+        <hr>
+
+        <div id="output" class="mt-4"></div>
+    </div>
+
+    <script>
+        async function uploadFile() {
+            let formData = new FormData(document.getElementById('uploadForm'));
+
+            const response = await fetch('/upload', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+            if (response.ok) {
+                document.getElementById('output').innerHTML = `<p>File uploaded successfully! File path: ${result.file_path}</p>
+                <button class="btn btn-success" onclick="extractText('${result.file_path}')">Extract Text</button>`;
+            } else {
+                document.getElementById('output').innerHTML = `<p>${result.message}</p>`;
+            }
+        }
+
+        async function extractText(filePath) {
+            const response = await fetch('/extract', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ file_path: filePath })
+            });
+
+            const result = await response.json();
+            if (response.ok) {
+                document.getElementById('output').innerHTML = `<p>Extracted Text:</p>
+                <textarea rows="10" class="form-control">${result.extracted_text}</textarea>
+                <button class="btn btn-info mt-3" onclick="trainModel('${result.extracted_text}')">Train Model on Text</button>`;
+            } else {
+                document.getElementById('output').innerHTML = `<p>${result.error}</p>`;
+            }
+        }
+
+        async function trainModel(textData) {
+            const response = await fetch('/train', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ text_data: textData })
+            });
+
+            const result = await response.json();
+            document.getElementById('output').innerHTML = `<p>${result.message}</p>`;
+        }
+    </script>
+</body>
+</html>
