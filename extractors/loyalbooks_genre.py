@@ -132,13 +132,14 @@ def main_loop():
     """
     Main loop to extract and download books from LoyalBooks
     """
-    page_number = 2
+    page_number = 1
+    genre = "Literature"
 
     while True:
         if page_number > 1:
-            page_url = f"{BASE_URL}/genre/Historical_Fiction?results=100&Page={page_number}"
+            page_url = f"{BASE_URL}/genre/{genre}?results=100&page={page_number}"
         else:
-            page_url = BASE_URL + "/genre/Historical_Fiction?results=100"
+            page_url = BASE_URL + "/genre/"+genre+"?results=100"
         print(f"Extracting books from {page_url}...")
         book_links = extract_books_from_page(page_url)
         if not book_links:
