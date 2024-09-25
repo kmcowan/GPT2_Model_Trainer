@@ -1,19 +1,26 @@
 import os
-import subprocess
-import pipreqs
 
+def list_python_libraries(venv_lib_dir):
+    if not os.path.exists(venv_lib_dir):
+        print(f"Directory '{venv_lib_dir}' not found.")
+        return
 
+    # List all files and directories in the specified directory
+    contents = os.listdir(venv_lib_dir)
+    print("Contents of the directory:")
+    libraries = []
+    for item in contents:
+        print(item)
+        libraries.append(item)
+    # sort the list alphabetically
+    libraries = libraries.sort()
 
-def create_requirements_with_pipreqs():
-    current_dir = os.getcwd()
-
-    try:
-        # Use pipreqs to create requirements.txt
-        subprocess.run(['pipreqs', current_dir, '--force'], check=True)
-        print("requirements.txt created successfully using pipreqs.")
-    except subprocess.CalledProcessError as e:
-        print(f"An error occurred: {e}")
-
+    #write libraries to a file called requirements.txt
+    with open('requirements.txt', 'w') as f:
+        for item in libraries:
+            f.write("%s\n" % item)
+        f.close();
 
 if __name__ == "__main__":
-    create_requirements_with_pipreqs()
+    venv_lib_dir = '/Users/kevincowan/PycharmProjects/rockymtn_gpt2/.venv/lib/python3.12/site-packages'
+    list_python_libraries(venv_lib_dir)
