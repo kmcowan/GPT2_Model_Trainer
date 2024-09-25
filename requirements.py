@@ -22,5 +22,5 @@ def list_python_libraries(venv_lib_dir):
         f.close();
 
 if __name__ == "__main__":
-    venv_lib_dir = '/Users/kevincowan/PycharmProjects/rockymtn_gpt2/.venv/lib/python3.12/site-packages'
+    venv_lib_dir = '[PATH-TO-YOUR]/.venv/lib/python3.12/site-packages'
     list_python_libraries(venv_lib_dir)
