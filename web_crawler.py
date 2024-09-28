@@ -77,7 +77,7 @@ def save_to_solr(data, solr_url, collection):
         # Commit the changes to Solr (optional, depending on Solr settings)
         requests.get(f"{solr_url}/{collection}/update?commit=true")
 
-        if response.status_code == 200:
+        if response.status_code < 210:
             print(f"Document successfully added to Solr for URL: {data['id']}")
         else:
             print(f"Failed to add document to Solr. Status code: {response.status_code}")
@@ -88,9 +88,9 @@ def save_to_solr(data, solr_url, collection):
 
 if __name__ == "__main__":
     # Example usage
-    url = 'https://solr.apache.org/guide/solr/latest/index.html'  # Replace this with the target website URL
+    url = 'https://huggingface.co/docs/huggingface_hub/guides/overview'  # Replace this with the target website URL
     solr_url = 'http://localhost:8983/solr'  # Replace with your Solr server URL
-    collection = 'training_data'  # Replace with your Solr collection name
+    collection = 'huggingface'  # Replace with your Solr collection name
 
 
     # Start crawling from the initial URL
