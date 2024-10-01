@@ -68,7 +68,7 @@ def load_model(model_path):
 
 if __name__ == "__main__":
     # Replace these paths with the actual paths to your local model and tokenizer
-    model_path = "fixed_rockymtn_gpt2.pth"
+    model_path = "/Users/kevincowan/huggingface/rockymtn_gpt2/rockymtn_gpt2.pth"
 
 
-    validate_gpt2_model(model_path)
+    validate_gpt2_model(model_path, input_text="Tell me a funny story about Bob")

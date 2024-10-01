@@ -34,7 +34,7 @@ def validate_model(model, tokenizer, validation_data):
             print(f"Error during validation for test #{i}: {e}")
 
 if __name__ == "__main__":
-    MODEL_PATH = "fixed_rockymtn_gpt2.pth"
+    MODEL_PATH = "/Users/kevincowan/huggingface/rockymtn_gpt2/rockymtn_gpt2.pth"
     model = load_model(MODEL_PATH)
 
     if model:

@@ -8,7 +8,7 @@ tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
 model = GPT2LMHeadModel.from_pretrained("gpt2")
 
 # Load the model state dictionary from the .pth file
-MODEL_PATH = "fixed_rockymtn_gpt2.pth"
+MODEL_PATH = "huggingface_updated/fixed_rockymtn_gpt2.pth"
 try:
     model.load_state_dict(torch.load(MODEL_PATH))
     print(f"Model '{MODEL_PATH}' loaded successfully.")

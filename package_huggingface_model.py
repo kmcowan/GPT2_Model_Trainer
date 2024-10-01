@@ -109,7 +109,7 @@ if __name__ == "__main__":
     # Example usage
     from transformers import GPT2LMHeadModel, GPT2Tokenizer  # Adjust if you're using a different architecture
 
-    model_path = "fixed_rockymtn_gpt2.pth"
+    model_path = "huggingface_updated/fixed_rockymtn_gpt2.pth"
     save_directory = "huggingface"
 
     # Load the model and tokenizer

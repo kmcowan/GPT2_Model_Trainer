@@ -32,5 +32,5 @@ def load_and_save_model(model_path, save_path):
 
 # Usage example
 model_path = "rockymtn_gpt2.pth"  # Path to your saved model checkpoint
-save_path = "fixed_rockymtn_gpt2.pth"  # Path to save the fixed model
+save_path = "huggingface_updated/fixed_rockymtn_gpt2.pth"  # Path to save the fixed model
 model = load_and_save_model(model_path, save_path)

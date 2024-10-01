@@ -2,3 +2,7 @@
 .DS_Store
 /.idea
 /results
+/__pycache__
+/fixed_model
+/huggingface
+/huggingface_updated
