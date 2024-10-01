@@ -17,7 +17,7 @@ def upload_model_to_huggingface(local_model_path, repo_id):
         raise FileNotFoundError(f"Local model path '{local_model_path}' does not exist.")
 
     # Ensure the Hugging Face token is available
-    token = "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" #HfFolder.get_token()
+    token = "[your huggingface tokey]" #HfFolder.get_token()
     if token is None:
         raise ValueError("Hugging Face token not found. Please log in using `huggingface-cli login`.")
 
