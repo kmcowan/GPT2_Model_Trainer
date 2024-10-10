@@ -9,17 +9,13 @@ from extractors.loyalbooks import TRAINING_DATA_PATH
 BASE_URL = "https://www.loyalbooks.com"
 
 # Directory to save training data
-V1_TRAINING_DATA_PATH = "/Users/kevincowan/training_data"
-
-TRAINING_DATA_PATH = "/Users/kevincowan/training_data_2"
-
 PREVIOUS_TRAINING_DATA_PATHS = [
-    V1_TRAINING_DATA_PATH,
+    "/Users/kevincowan/training_data",
+    "/Users/kevincowan/training_data_2"
+    "/Users/kevincowan/training_data_3"
 ]
 
-# Create the training data directory if it doesn't exist
-if not os.path.exists(TRAINING_DATA_PATH):
-    os.makedirs(TRAINING_DATA_PATH)
+TRAINING_DATA_PATH = "/Users/kevincowan/training_data_4"
 
 
 def get_soup(url):
@@ -133,9 +129,10 @@ def main_loop():
     Main loop to extract and download books from LoyalBooks
     """
     page_number = 1
-    genre = "Literature"
+    genre = "Poetry"
 
     while True:
+
         if page_number > 1:
             page_url = f"{BASE_URL}/genre/{genre}?results=100&page={page_number}"
         else:

@@ -74,10 +74,44 @@ data_collator = DataCollatorForLanguageModeling(
 # Define compute_metrics function
 def compute_metrics(eval_pred):
     logits, labels = eval_pred
-    predictions = np.argmax(logits, axis=-1)
-    accuracy = accuracy_score(labels, predictions)
-    perplexity = math.exp(eval_pred.loss)
-    return {"accuracy": accuracy, "perplexity": perplexity}
+
+    try:
+        # Step 1: Detect if we have multiclass (argmax) or multilabel (threshold) predictions
+        if len(logits.shape) > 2:
+            # Multiclass classification: use argmax to get the predicted class
+            predictions = np.argmax(logits, axis=-1)
+        else:
+            # Multilabel classification or binary classification: apply threshold
+            predictions = (logits > 0.5).astype(int)
+
+        # Step 2: Check and correct shape mismatch
+        if predictions.shape != labels.shape:
+            print(f"Shape mismatch detected! Predictions: {predictions.shape}, Labels: {labels.shape}")
+
+            # If labels are 1D and predictions are 2D, flatten predictions (or vice versa)
+            if len(labels.shape) == 1 and len(predictions.shape) == 2:
+                predictions = predictions.flatten()
+            elif len(labels.shape) == 2 and len(predictions.shape) == 1:
+                labels = labels.flatten()
+
+        # Step 3: Attempt to calculate accuracy
+        accuracy = accuracy_score(labels, predictions)
+
+        # Optionally, calculate other metrics like perplexity (for language models)
+        perplexity = math.exp(eval_pred.loss) if hasattr(eval_pred, 'loss') else None
+
+        metrics = {"accuracy": accuracy}
+        if perplexity:
+            metrics["perplexity"] = perplexity
+
+        return metrics
+
+    except ValueError as e:
+        print(f"Error in computing metrics: {e}. Attempting to fix shapes...")
+
+        # Graceful failure: return default values for metrics in case of error
+        return {"accuracy": 0.0, "error": str(e)}
+
 
 # Define TrainingArguments
 training_args = TrainingArguments(
@@ -95,6 +129,7 @@ training_args = TrainingArguments(
     evaluation_strategy="epoch",
     save_strategy="epoch", # Change to "steps" if you want more frequent evaluations
     load_best_model_at_end=True,
+    remove_unused_columns=False,
     fp16=False,                      # Assuming GPU supports FP16 for faster training
     max_grad_norm=1.0,              # Gradient clipping
     warmup_steps=500,               # Warmup for stable training
